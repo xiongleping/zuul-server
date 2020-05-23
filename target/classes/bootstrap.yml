@@ -1,10 +1,31 @@
 #网关服务端口号
 server:
   port: 80
+  
+#actuator相关的，接下来自动刷新配置的时候需要使用  
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints: 
+    web:
+      exposure:
+        include: "*"
 #网关服务ID 集群部署时必须一致
 spring:
   application:
     name: zuul-gateway-server
+  cloud:
+     config:
+       discovery: 
+        #默认开启读取取权限
+        enabled: true
+        #配置中心服务端serviceid
+        service-id: config-server
+       label: master
+       profile: dev
+       fail-fast: true
+       
 eureka:
   instance: 
     #注册中心ip地址
@@ -24,24 +45,9 @@ ribbon:
     # 关闭feign客户端的ribbon负载均衡器
     enabled: true 
   #指建立连接后从服务器读取到可用资源所用的时间
-  ReadTimeout: 5000
+  ReadTimeout: 8000
   #指建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
-  ConnectTimeout: 5000  
-  
-zuul: 
-   host:
-    connect-timeout-millis: 15000 #HTTP连接超时要比Hystrix的大
-    socket-timeout-millis: 60000   #socket超时
-   routes: 
-      #定义转发服务规则
-      api-member: 
-         #客户端请求127.0.0.1:80/api-member开头的 则转发到会员服务
-         path: /api-member/**
-         serviceid: api-member-server
-      #定义转发服务规则
-      api-order: 
-         #客户端请求127.0.0.1:80/api-order开头的 则转发到订单服务
-         path: /api-order/**
-         serviceid: api-order-server
+  ConnectTimeout: 8000  
+
      
       
