@@ -66,6 +66,19 @@
                <artifactId>spring-boot-configuration-processor</artifactId>
                <optional>true</optional>
           </dependency>
+          
+          <!-- 整lombok通过@data实现getter setter等一般代码  -->
+          <dependency>
+               <groupId>org.projectlombok</groupId>
+               <artifactId>lombok</artifactId>
+          </dependency>
+          
+          <!-- 引入swagger依赖   -->
+          <dependency>
+             <groupId>com.spring4all</groupId>
+             <artifactId>swagger-spring-boot-starter</artifactId>
+             <version>1.7.0.RELEASE</version>
+          </dependency>
 	</dependencies>
 
 	<build>

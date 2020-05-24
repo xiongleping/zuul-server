@@ -5,6 +5,7 @@ package cn.sinobest.zuul.api.filter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -12,13 +13,19 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Administrator
  *
  */
-@Component
+//@Component
+@Slf4j
 public class TokenFilter extends ZuulFilter{
 	
+	@Value("${server.port}")
+	private String serverPort;
+
 	/**
 	 * 判断过滤器是否生效
 	 */
@@ -46,6 +53,7 @@ public class TokenFilter extends ZuulFilter{
 			requestContext.setResponseStatusCode(401);
 			return null;
 		}
+		log.info("hi,look,current server port is {} ",serverPort);
 		return null;
 	}
 

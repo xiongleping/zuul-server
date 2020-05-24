@@ -8,9 +8,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 
+import com.spring4all.swagger.EnableSwagger2Doc;
+
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
+@EnableSwagger2Doc
 public class ZuulGateWayApplication {
 	/**
 	 * @EnableZuulProxy 开启网关代理
@@ -30,4 +33,6 @@ public class ZuulGateWayApplication {
 	public ZuulProperties zuulProperties() {
 		return new ZuulProperties();
 	}
+	
+	
 } 
